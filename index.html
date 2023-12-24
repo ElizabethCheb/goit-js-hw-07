@@ -3,12 +3,163 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JavaScript</title>
+    <title>Boxes Generator</title>
+    <link rel="stylesheet" href="./styles.css" />
     <script src="./task-1.js" defer></script>
     <script src="./task-2.js" defer></script>
     <script src="./task-3.js" defer></script>
-  </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      #boxes {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      #boxes div {
+        margin: 5px;
+      }
+    </style>
+  <script>
+    function getRandomHexColor() {
+      return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+    }
+    function changeColor() {
+      var newColor = getRandomHexColor();
+      document.body.style.backgroundColor = newColor;
+      document.querySelector('.color').textContent = newColor;
+    }
+  </script>
+</head>
   <body>
-    <h1>Wabalabadabdab!</h1>
+    <h2>6 задача</h2>
+    <div class="div_cont" id="controls">
+      <input class="min_max" type="number" min="1" max="100" step="1" />
+      <button class="but_crt" type="button" data-create>Create</button>
+      <button class="but_dst" type="button" data-destroy>Destroy</button>
+    </div>
+    
+    <div class="boxes" id="boxes"></div>
+    
+    <script>
+      function getRandomHexColor() {
+        return `#${Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, '0')}`;
+      }
+      function createBoxes(amount) {
+        const boxesContainer = document.getElementById('boxes');
+        boxesContainer.innerHTML = '';
+        let size = 30;
+        for (let i = 0; i < amount; i++) {
+          const box = document.createElement('div');
+          box.style.width = `${size}px`;
+          box.style.height = `${size}px`;
+          box.style.backgroundColor = getRandomHexColor();
+          boxesContainer.appendChild(box);
+          size += 10;
+        }
+      }
+      function destroyBoxes() {
+        const boxesContainer = document.getElementById('boxes');
+        boxesContainer.innerHTML = '';
+      }
+    
+      document.querySelector('[data-create]').addEventListener('click', function () {
+        const input = document.querySelector('input');
+        const amount = parseInt(input.value);
+    
+        if (amount >= 1 && amount <= 100) {
+          createBoxes(amount);
+          input.value = '';
+        } else {
+          alert('Please enter a number between 1 and 100.');
+        }
+      });
+      document.querySelector('[data-destroy]').addEventListener('click', destroyBoxes);
+    </script>
+    <h2>5 Задача</h2>
+    <div class="widget"> 
+      <p class="widget_paragraf">Background color: <span class="color">-</span></p>
+      <button type="button" class="change-color" onclick="changeColor()">Change color</button>
+    </div>
+    <h2>3 Задача</h2>
+    <input type="text" id="name-input" class="placeholder" placeholder="Please enter your name" />
+<h1 class="nonAnonymous"><span id="name-output">Anonymous</span></h1>
+    <script>
+      document.getElementById('name-input').addEventListener('input', function() {
+          var inputValue = this.value.trim(); // Очищення від пробілів по краях
+  
+          var outputSpan = document.getElementById('name-output');
+          
+          if (inputValue === "") {
+              outputSpan.textContent = "Anonymous";
+          } else {
+              outputSpan.textContent = inputValue;
+          }
+      });
+  </script>
+  <h2>4 Задача</h2>
+  <form class="login-form" id="loginForm">
+    <label class="label">
+      <p class="name_label">Email</p>
+      <input class="email" type="email" name="email" />
+    </label>
+    <label class="label">
+      <p class="name_label">Password</p>
+      <input class="email" type="password" name="password" />
+    </label>
+    <button class="login" type="submit"><p class="log_in_btn">Log in</p></button>
+  </form>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      var emailValue = this.elements.email.value.trim();
+      var passwordValue = this.elements.password.value.trim();
+      if (emailValue === '' || passwordValue === '') {
+        alert('All form fields must be filled in');
+        return;
+      }
+      var formData = {
+        email: emailValue,
+        password: passwordValue
+      };
+      console.log(formData);
+      this.reset();
+    });
+  </script>
+  <h2>1 Задача</h2>
+    <ul class="ul_categories" id="categories">
+      <li class="item1">
+        <h2 class="h2_ani">Animals</h2>
+        <ul class="ul_cate">
+          <li class="li_cate"><p class="p_cate">Cat</p></li>
+          <li class="li_cate"><p class="p_cate">Hamster</p></li>
+          <li class="li_cate"><p class="p_cate">Horse</p></li>
+          <li class="li_cate"><p class="p_cate">Parrot</p></li>
+        </ul>
+      </li>
+      <li class="item2">
+        <h2 class="h2_ani">Products</h2>
+        <ul class="ul_cate">
+          <li class="li_cate"><p class="p_cate">Bread</p></li>
+          <li class="li_cate"><p class="p_cate">Parsley</p></li>
+          <li class="li_cate"><p class="p_cate">Cheese</p></li>
+        </ul>
+      </li>
+      <li class="item3">
+        <h2 class="h2_ani">Technologies</h2>
+        <ul class="ul_cate">
+          <li class="li_cate"><p class="p_cate">HTML</p></li>
+          <li class="li_cate"><p class="p_cate">CSS</p></li>
+          <li class="li_cate"><p class="p_cate">JavaScript</p></li>
+          <li class="li_cate"><p class="p_cate">React</p></li>
+          <li class="li_cate"><p class="p_cate">Node.js</p></li>
+        </ul>
+      </li>
+    </ul>
+    <h2>2 Задача</h2>
+    <ul class="gallery"></ul>
+    
   </body>
 </html>
