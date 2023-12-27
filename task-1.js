@@ -1,9 +1,9 @@
 const categoriesList = document.getElementById('categories');
-const categoriesItems = categoriesList.querySelectorAll('li.item');
-console.log(`Total categories: ${categoriesItems.length}`);
-categoriesItems.forEach(category => {
+const categoriesItems = categoriesList.children;
+console.log(`Кількість категорій: ${categoriesItems.length}`);
+for (const category of categoriesItems) {
   const categoryName = category.querySelector('h2').textContent;
-  const categoryItemsCount = category.querySelectorAll('ul li').length;
-  console.log(`Category: ${categoryName}`);
-  console.log(`Elements count: ${categoryItemsCount}`);
-});
+  const categoryItemsCount = category.querySelectorAll('ul.ul_cate li').length;
+  console.log(`Категорія: ${categoryName}`);
+  console.log(`Кількість елементів у категорії: ${categoryItemsCount}`);
+}
